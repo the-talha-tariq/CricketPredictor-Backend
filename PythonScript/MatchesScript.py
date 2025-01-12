@@ -11,7 +11,8 @@ soup = BeautifulSoup(response.content, "html.parser")
 
 # Find all match divs with different class patterns
 match_divs = soup.find_all("div", class_=["ds-p-4 hover:ds-bg-ui-fill-translucent", 
-                                          "ds-p-4 hover:ds-bg-ui-fill-translucent ds-border-t ds-border-line"])
+                                          "ds-p-4 hover:ds-bg-ui-fill-translucent ds-border-t ds-border-line",
+                                          "ds-p-4 hover:ds-bg-ui-fill-translucent ds-border-t ds-border-line ds-bg-ui-fill-translucent-hover"])
 
 # List to store scraped match data
 matches = []
@@ -21,7 +22,9 @@ for match in match_divs:
     try:
         # Extract match date
         date = match.find("div", class_="ds-text-compact-xs ds-font-bold ds-w-24").text.strip()
-
+        date = date.replace(" '23","")
+        date = date.replace(" '24","")
+        date = date.replace(" '25","")
         # Extract team names
         teams = match.find_all("p", class_="ds-text-tight-m ds-font-bold ds-capitalize ds-truncate")
         team1 = teams[0].text.strip()
@@ -29,6 +32,12 @@ for match in match_divs:
 
         # Extract venue
         venue = match.find("div", class_="ds-text-tight-s ds-font-regular ds-truncate ds-text-typo-mid3").text.strip()
+        venue = venue.replace("1st Test  â€¢Â ","")
+        venue = venue.replace("2nd Test  â€¢Â ","")
+        venue = venue.replace("3rd Test  â€¢Â ","")
+        venue = venue.replace("4th Test  â€¢Â ","")
+        venue = venue.replace("5th Test  â€¢Â ","")
+
 
         # Extract result
         result = match.find("p", class_="ds-text-tight-s ds-font-medium ds-line-clamp-2 ds-text-typo").text.strip()
