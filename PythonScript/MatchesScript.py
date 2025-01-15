@@ -22,9 +22,30 @@ for match in match_divs:
     try:
         # Extract match date
         date = match.find("div", class_="ds-text-compact-xs ds-font-bold ds-w-24").text.strip()
-        date = date.replace(" '23","")
-        date = date.replace(" '24","")
-        date = date.replace(" '25","")
+        date = date.replace(" '23"," 2023")
+        date = date.replace(" '24"," 2024")
+        date = date.replace(" '25"," 2025")
+        date = date.replace("Mon","Monday")
+        date = date.replace("Tue","Tuesday")
+        date = date.replace("Wed","Wednesday")
+        date = date.replace("Fri","Friday")
+        date = date.replace("Sat","Saturday")
+        date = date.replace("Sun","Sunday")
+        date = date.replace("Jan"," January")
+        date = date.replace("Feb"," February")
+        date = date.replace("Mar"," March ")
+        date = date.replace("Apr"," April")
+        date = date.replace("May"," May")
+        date = date.replace("Jun"," June")
+        date = date.replace("Jul"," July")
+        date = date.replace("Aug"," August")
+        date = date.replace("Sep"," September")
+        date = date.replace("Oct"," October")
+        date = date.replace("Nov"," November")
+        date = date.replace("Dec"," December")
+
+
+
         # Extract team names
         teams = match.find_all("p", class_="ds-text-tight-m ds-font-bold ds-capitalize ds-truncate")
         team1 = teams[0].text.strip()
