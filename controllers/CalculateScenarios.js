@@ -8,12 +8,18 @@ const calculateScenarios = async (teamName) => {
     // Step 1: Fetch all pending matches and current rankings
     const pendingMatches = await Match.find({ result: "Pending" });
     const rankings = await Ranking.find();
-
+    console.log(pendingMatches[0])
     // Array to store valid scenarios
     const validScenarios = [];
 
     // Helper function to simulate outcomes recursively
     const simulateOutcomes = (matches, currentRankings, scenario = []) => {
+
+      console.log("Simulating outcome:", {
+        match: currentMatch,
+        rankings: updatedRankings,
+        scenario,
+      });
       // Base case: No pending matches left
       if (matches.length === 0) {
         // Sort rankings by points and percentagePoints
@@ -102,7 +108,7 @@ const calculateScenarios = async (teamName) => {
 
 // Example usage
 const runPrediction = async () => {
-  const teamName = "Australia"; // Replace with the desired team name
+  const teamName = "South Africa"; // Replace with the desired team name
   const scenarios = await calculateScenarios(teamName);
 
   console.log(
@@ -120,4 +126,4 @@ const runPrediction = async () => {
   });
 };
 
-runPrediction();
+// runPrediction();
